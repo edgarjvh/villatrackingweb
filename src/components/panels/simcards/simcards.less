@@ -1,0 +1,482 @@
+.panel-title{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    align-items: center;
+
+    span{
+        display: flex;
+        align-items: center;
+
+        .loader.hidden{
+            display: none;
+        }
+        .loader{            
+            font-size: 24px;
+            margin-left: 10px;
+        }
+    }
+
+    #btn-new-simcard{
+        font-size: 2rem;
+        cursor: pointer;
+    }
+    #btn-new-simcard.disabled{
+        pointer-events: none;
+        color:rgba(0,0,0,0.3);
+    }
+    #btn-new-simcard:hover{
+        color:rgba(0,0,0,0.7);
+    }
+}
+.content{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+
+    .panel-message{
+        position: absolute;        
+        left: 0;
+        width: 100%;
+        height: 32px;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;        
+        z-index: 100;
+        box-shadow: 0 1px 2px 1px rgba(0,0,0,0.5);      
+        transition: ease top 0.2s;  
+    }
+    .panel-message.hidden{
+        top: -35px !important;
+    }
+    .panel-message.success{
+        top: 0 !important;
+        background-color: lightgreen;        
+    }
+    .panel-message.error{
+        top: 0 !important;
+        background-color: lightcoral;        
+    }
+    .panel-message.running{
+        top: 0 !important;
+        background-color: lightskyblue;        
+    }
+    
+    form{
+        min-width: 300px;
+        flex-grow: 1;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+
+        .btn-area{
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            button{
+                margin-top: auto !important;
+            }
+        }
+    }
+
+    .simcards-list{
+        flex-grow: 2;        
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+
+        .search-container{
+			display: flex;
+			align-items: center;
+	
+			.input-box-container{
+				flex-grow: 1;            
+			}
+			.btn-refresh-simcard-list{
+				margin-bottom: 5px;
+				margin-left: 10px;
+				font-size: 22px;
+				cursor: pointer;
+				transition: color ease 0.3s;
+			}
+			.btn-refresh-simcard-list:hover{
+				color: rgba(0,0,0,0.7);
+            }
+            .btn-refresh-simcard-list.disabled{
+                pointer-events: none;
+                color:rgba(0,0,0,0.3);
+            }
+		}
+
+        .simcards-list-content{
+            display: flex;
+            flex-direction: row;
+            flex-basis: 100%;
+            
+            .tbl.disabled{
+                pointer-events: none;
+    
+                .thead{
+                    color: rgba(0,0,0,0.3);
+                }
+            }             
+    
+            .tbl{
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                flex-basis: 100%;            
+    
+                .thead,.tbody,.wrapper{
+                    display: flex;
+                    flex-direction: column
+                }
+                .tbody{
+                    position: relative;
+                    flex-grow: 1;
+                    
+    
+                    .wrapper{
+                        position: absolute;
+                        max-width: 100%;
+                        min-width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;                    
+                        overflow-y: scroll;
+                        overflow-x: scroll;
+    
+                        .tcol{
+                            padding: 7px 5px;
+                        }
+                        .trow:hover{
+                            background-color: rgba(0,0,0,0.03);
+                        }
+                        .trow.editing{
+                            background-color: lightblue !important;
+                        }
+                        .trow.current{
+                            pointer-events: none;
+                            color: rgba(0,0,0,0.3);
+                        }
+                        .trow.inactive{
+                            background-color: rgba(255, 0, 0, 0.05);
+                        }
+                    }                
+                }
+                .thead{
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    padding-right: 18px;
+                    font-weight: 600;
+                    font-family: 'Ubuntu', sans-serif;
+                }
+                .thean{
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    padding-right: 18px;
+                    padding-left: 15px;
+                    font-weight: 400;
+                    font-family: 'Ubuntu', sans-serif;
+                    position: relative;
+
+                    .counter{
+                        margin-left: 15px;
+                        font-size: inherit;                                           
+                        position: absolute;
+                        right: 18px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: darkred;
+                        margin: 0;
+                    }
+                }
+                .trow{
+                    display: flex;
+                    transition: background-color ease 0.2s;
+                    align-items: center;
+                    font-size: 14px;
+                    
+                    .tcol{
+                        text-align: left;
+                        padding: 5px;
+                    }
+                    .tcol.hidden{
+                        display: none;
+                    }
+                    .tcol.operator{
+                        min-width: 100px;
+                        max-width: 100px;
+                        text-transform: capitalize;
+                        margin-left: 10px;
+                    }
+                    .tcol.gsm{
+                        min-width: 100px; 
+                        max-width: 100px; 
+                    }                    
+                    .tcol.serial{
+                        min-width: 160px;                        
+                        max-width: 160px;  
+                    }                    
+                    .tcol.apn{
+                        min-width: 130px;                        
+                        max-width: 130px;                        
+                    }                    
+                    .tcol.filler{
+                        flex-grow: 1;                    
+                    }                    
+                    .tcol.action{
+                        min-width: 50px;
+                        max-width: 50px;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        .btn-action{
+                            cursor: pointer;
+                            margin-left: 15px;
+                        }
+                        .btn-action:hover{
+                            color: rgba(0,0,0,0.7);
+                        }
+                        .btn-action.no-device {
+							color: rgba(0, 0, 0, 0.3) !important;
+							pointer-events: none;
+						}
+                    }
+                }
+                .no-records{
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        }        
+    }
+}
+
+.sub-panels {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    display: none;
+
+    .sub-panels-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .sub-panel.sub-panel-form.hidden{
+            left: -400px;
+        }
+        .sub-panel.sub-panel-form{
+            width: 350px;
+        }
+        .sub-panel.sub-panel-simcard-device.hidden{
+            left: -550px;
+        }
+        .sub-panel.sub-panel-simcard-device{
+            width: 500px;
+		}
+
+        .sub-panel {
+            position: absolute;
+            // width: 350px;
+            height: 100%;
+            top: 0;
+            left: 0;							
+            background-color: #fff;
+            box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.7);							
+            padding: 60px 10px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            transition: left ease 0.3s;
+
+            .sub-panel-title{
+                text-align: left;
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 25px;
+                position: relative;
+
+                span{
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 0;
+                    font-weight: 600;
+                    font-size: 16px;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    border-radius: 50%;
+                    background-color: #000;
+                    color: #fff;
+                    padding: 0;
+                    position: absolute;
+                    text-align: center;
+                }
+            }
+
+            form{
+                min-width: 300px;
+                flex-grow: 1;
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+        
+                .btn-area{
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-end;
+                    justify-content: space-between;                    
+                }
+        
+                .input-toggle-container-group-row{
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            .tbl.disabled{
+                pointer-events: none;
+    
+                .thead{
+                    color: rgba(0,0,0,0.3) !important;
+                }
+            } 
+
+            .tbl{
+                width: 100%;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
+
+                .trow{
+                    display: flex;
+                    align-items: center;
+                    cursor: default;
+
+                    .tcol{
+                        padding: 7px 5px;
+                        text-transform: capitalize;
+                    }
+                    .tcol.hidden{
+                        display: none;
+                    }
+
+                    .tcol.license-plate{
+                        max-width: 75px;
+                        min-width: 75px;
+                    }
+                    .tcol.brand{
+                        max-width: 90px;
+                        min-width: 90px;
+                    }
+                    .tcol.model{
+                        max-width: 90px;
+                        min-width: 90px;
+                    }
+                    .tcol.type{
+                        flex-grow: 1;
+                    }
+                    .tcol.year{
+                        max-width: 60px;
+                        min-width: 60px;
+                    }
+                    .tcol.color{
+                        max-width: 80px;
+                        min-width: 80px;
+                    }
+                    .tcol.status{
+                        max-width: 60px;
+                        min-width: 60px;
+                    }
+                }
+                .thead{
+                   font-weight: 600; 
+                   .trow{
+                       border-top: 1px solid rgba(0, 0, 0, 0.3);
+                       border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+                   }
+                }
+                .tbody{
+                    position: relative;
+                    width: 100%;
+                    flex-grow: 1;
+
+                    .tbody-wrapper{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        left: 0;
+                        top: 10px;
+
+                        .trow:hover{
+                            background-color: rgba(0, 0, 0, 0.05);
+                        }
+                        .trow.selected{
+                            background-color: skyblue !important;
+                        }
+                    }
+                }
+            }
+
+            .simcard-device-container{
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+
+				.row{
+					display: flex;
+					align-items: center;
+					.hidden{
+						display: none;
+					}
+
+					.left-col{
+						font-weight: 600;
+						max-width: 150px;
+						min-width: 150px;
+					}
+					.right-col{
+						flex-grow: 1;
+					}
+					.left-col, .right-col{
+						padding: 5px 0;
+					}
+				}
+			}
+
+            .btn-area{  
+				border-top: 1px solid rgba(0, 0, 0, 0.3);				
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+				justify-content: space-between; 
+				padding-top: 5px;
+                flex-grow: unset !important;
+            }
+        }        
+    }
+}
+
+.input-box-container,
+.select-box-container{
+    margin-bottom: 5px;
+    background-color: transparent !important;
+}

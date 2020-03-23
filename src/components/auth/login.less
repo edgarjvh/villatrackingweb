@@ -1,0 +1,103 @@
+.main-container {
+    .logo-container {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+
+        img {
+            width: 600px;
+        }
+    }
+
+    .login-form {
+        width: 500px;
+        padding: 15px;
+        // background-color: rgba(255, 255, 255, 0.5);
+        background-color: transparent;
+        border-radius: 15px;
+        box-shadow: -3px -3px 5px 3px rgba(255,255,255,0.2), 3px 3px 7px 5px rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 40%;
+        left: 50%;
+
+        h3 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+
+            input[name="email"]{
+                text-transform: lowercase;
+            }
+
+            input:not([type=submit]) {
+                padding: 10px 15px;
+                margin: 5px 0;
+                border: 1px solid rgba(0, 0, 0, 0.4);
+                border-radius: 5px;
+            }
+
+            .submit {
+                margin: 5px 0;
+                display: flex;
+                align-items: center;
+
+                input[type=submit] {
+                    padding: 15px 20px;
+                    border: 0;
+                    // border: 1px solid rgba(9,9,121,1);
+                    border-radius: 5px;
+                    cursor: pointer;
+                    background-color: transparent;
+                    font-weight: bold;
+                    transition: all ease 0.3s;
+                    box-shadow: inset -2px -2px 5px 3px rgba(255,255,255,0.2), inset 2px 2px 7px 5px rgba(0, 0, 0, 0.5);
+                    color: #fff;
+                }
+
+                input[type=submit]:not(:disabled):hover{
+                    box-shadow: -2px -2px 5px 3px rgba(255,255,255,0.2), 2px 2px 7px 5px rgba(0, 0, 0, 0.5);
+                }
+
+                a{
+                    text-decoration: none;
+                    color: rgba(9,9,121,1);
+                    font-weight: 600;
+                    font-size: 14px;
+                    margin-left: 20px;
+                }
+                a.loading{
+                    pointer-events: none;
+                }
+                
+                #loading{
+                    flex-grow: 1;                    
+                    text-align: right;
+                }
+                #loading.shown{
+                    display: block;
+                }
+                #loading.hidden{
+                    display: none;
+                }
+            }
+        }
+
+        .msg{
+            display: flex;
+            justify-content: center;
+            font-size: 14px;
+
+            .success{
+                color: darkgreen;
+            }
+            .error{
+                color: darkred;
+            }
+        }
+    }
+
+}

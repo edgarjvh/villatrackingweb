@@ -1,0 +1,428 @@
+.main-panel-container.hidden {
+  left: -100%;
+}
+.main-panel-container.shown {
+  left: 0;
+}
+.main-panel-container {
+  position: absolute !important;
+  width: 900px;
+  height: 100%;
+  top: 0;
+  border-radius: 0 45px 0 0;
+  background-color: transparent;
+  z-index: 10;
+  padding-right: 5px;
+  transition: left ease 0.2s;
+}
+.main-panel-container .panel-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 0 45px 0 0;
+}
+.main-panel-container .panel-container .gutter {
+  width: 0;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  border-radius: inherit;
+  cursor: pointer;
+}
+.main-panel-container .panel-container .panel {
+  box-shadow: 3px 0 3px rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  position: absolute;
+  border-left: 1px solid #4b4b4b;
+  background: #ffffff;
+  border-radius: inherit;
+  background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, #ececec 100%);
+  background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #ececec 100%);
+  background: radial-gradient(ellipse at center, #ffffff 0%, #ececec 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ececec', GradientType=1);
+  overflow: hidden;
+  z-index: 8;
+}
+.main-panel-container .panel-container .panel .panel-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .nub {
+  background: url("/img/panel-nub.svg");
+  width: 36px;
+  height: 130px;
+  position: absolute;
+  right: -36px;
+  bottom: 10px;
+  background-position-x: -1px;
+  cursor: move;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 0 10px 10px 10px;
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-title {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  position: relative;
+  margin-top: 55px;
+  background: #b8b8b8;
+  background: linear-gradient(270deg, #ffffff 0%, #eeeeee 50%, #e6e6e6 100%);
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-title .border-bottom {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: #b8b8b8;
+  background: linear-gradient(270deg, #b8b8b8 0%, #e4e4e4 50%, #ffffff 100%);
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-title .border-top {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  top: 0;
+  left: 0;
+  background: #b8b8b8;
+  background: linear-gradient(270deg, #b8b8b8 0%, #e4e4e4 50%, #ffffff 100%);
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .content {
+  flex-grow: 1;
+  padding-top: 10px;
+  padding-right: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-close-btn {
+  position: absolute;
+  right: 25px;
+  top: 5px;
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-close-btn:hover i {
+  filter: brightness(90%);
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-not-focused {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-selection-handler {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s;
+  display: none;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .panel-selection-handler:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .drag-handler {
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  cursor: grab;
+  z-index: 7;
+}
+.main-panel-container .panel-container .panel .panel-wrapper .panel-content .drag-handler:hover {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#eeeeee+0,e5e5e5+100 */
+  background: #eeeeee;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #eeeeee 0%, #e5e5e5 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #eeeeee 0%, #e5e5e5 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #f1f0f0 0%, #b6b6b6 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#e5e5e5', GradientType=1);
+  /* IE6-9 */
+}
+.main-panel-container .panel-container .panel .input-box-container.disabled,
+.main-panel-container .panel-container .panel .select-box-container.disabled {
+  pointer-events: none;
+}
+.main-panel-container .panel-container .panel .input-box-container.disabled label,
+.main-panel-container .panel-container .panel .select-box-container.disabled label {
+  color: rgba(0, 0, 0, 0.3);
+}
+.main-panel-container .panel-container .panel .input-box-container,
+.main-panel-container .panel-container .panel .select-box-container {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 45px;
+  position: relative;
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 2rem;
+  font-family: "Hind Madurai", sans-serif !important;
+}
+.main-panel-container .panel-container .panel .input-box-container .arrow-icon,
+.main-panel-container .panel-container .panel .select-box-container .arrow-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.5);
+}
+.main-panel-container .panel-container .panel .input-box-container .search-icon,
+.main-panel-container .panel-container .panel .select-box-container .search-icon,
+.main-panel-container .panel-container .panel .input-box-container .clear-search-icon,
+.main-panel-container .panel-container .panel .select-box-container .clear-search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.3);
+}
+.main-panel-container .panel-container .panel .input-box-container .search-icon,
+.main-panel-container .panel-container .panel .select-box-container .search-icon {
+  cursor: pointer;
+  transition: ease all 0.2s;
+}
+.main-panel-container .panel-container .panel .input-box-container .search-icon:hover,
+.main-panel-container .panel-container .panel .select-box-container .search-icon:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+.main-panel-container .panel-container .panel .input-box-container .clear-search-icon,
+.main-panel-container .panel-container .panel .select-box-container .clear-search-icon {
+  right: 35px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: ease all 0.2s;
+  color: rgba(0, 0, 0, 0.5);
+}
+.main-panel-container .panel-container .panel .input-box-container .clear-search-icon.hidden,
+.main-panel-container .panel-container .panel .select-box-container .clear-search-icon.hidden {
+  display: none;
+}
+.main-panel-container .panel-container .panel .input-box-container .clear-search-icon:hover,
+.main-panel-container .panel-container .panel .select-box-container .clear-search-icon:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+.main-panel-container .panel-container .panel .input-box-container label,
+.main-panel-container .panel-container .panel .select-box-container label {
+  background-color: transparent;
+  font-size: 0.75rem;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.7);
+  font-style: italic;
+  padding: 0 10px;
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transition: all 0.2s;
+  cursor: text;
+  margin: 0;
+}
+.main-panel-container .panel-container .panel .input-box-container input[type="search"],
+.main-panel-container .panel-container .panel .select-box-container input[type="search"] {
+  padding-right: 50px !important;
+}
+.main-panel-container .panel-container .panel .input-box-container input[type="search"]::-webkit-search-decoration,
+.main-panel-container .panel-container .panel .select-box-container input[type="search"]::-webkit-search-decoration,
+.main-panel-container .panel-container .panel .input-box-container input[type="search"]::-webkit-search-cancel-button,
+.main-panel-container .panel-container .panel .select-box-container input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+.main-panel-container .panel-container .panel .input-box-container input:valid + label,
+.main-panel-container .panel-container .panel .select-box-container input:valid + label,
+.main-panel-container .panel-container .panel .input-box-container input:focus + label,
+.main-panel-container .panel-container .panel .select-box-container input:focus + label {
+  top: 5px;
+  color: darkred;
+  font-size: 0.65rem;
+}
+.main-panel-container .panel-container .panel .input-box-container input:read-only + label,
+.main-panel-container .panel-container .panel .select-box-container input:read-only + label {
+  top: 5px;
+  color: darkred;
+  font-size: 0.65rem;
+}
+.main-panel-container .panel-container .panel .input-box-container input,
+.main-panel-container .panel-container .panel .select-box-container input {
+  background-color: transparent;
+  border: 1px solid transparent;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  text-align: left;
+  font-size: 0.7rem;
+}
+.main-panel-container .panel-container .panel .input-box-container input[data-type="email"],
+.main-panel-container .panel-container .panel .select-box-container input[data-type="email"] {
+  text-transform: lowercase;
+}
+.main-panel-container .panel-container .panel .input-box-container input[data-type="license-plate"],
+.main-panel-container .panel-container .panel .select-box-container input[data-type="license-plate"] {
+  text-transform: uppercase;
+}
+.main-panel-container .panel-container .panel .input-box-container input[data-type="name"],
+.main-panel-container .panel-container .panel .select-box-container input[data-type="name"] {
+  text-transform: capitalize;
+}
+.main-panel-container .panel-container .panel .input-box-container select,
+.main-panel-container .panel-container .panel .select-box-container select {
+  background-color: transparent;
+  border: 1px solid transparent;
+  width: calc(98%);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 0.7rem;
+}
+.main-panel-container .panel-container .panel .input-box-container select:valid + label,
+.main-panel-container .panel-container .panel .select-box-container select:valid + label,
+.main-panel-container .panel-container .panel .input-box-container select:focus + label,
+.main-panel-container .panel-container .panel .select-box-container select:focus + label {
+  top: 4px;
+  font-size: 0.65rem;
+  color: darkred;
+}
+.main-panel-container .panel-container .panel .input-toggle-container.disabled {
+  pointer-events: none;
+}
+.main-panel-container .panel-container .panel .input-toggle-container.disabled .lbl-toggle-button {
+  color: rgba(0, 0, 0, 0.3);
+}
+.main-panel-container .panel-container .panel .input-toggle-container {
+  min-width: 5.8rem;
+  max-width: 5.8rem;
+  height: 1.875rem;
+  position: relative;
+  margin: 0 2px;
+}
+.main-panel-container .panel-container .panel .input-toggle-container input {
+  display: none;
+}
+.main-panel-container .panel-container .panel .input-toggle-container input:checked + label {
+  background-color: #ffb80d;
+}
+.main-panel-container .panel-container .panel .input-toggle-container input:checked + label .input-toggle-button {
+  left: calc(100% - 1.8125rem);
+}
+.main-panel-container .panel-container .panel .input-toggle-container input:checked + label .lbl-toggle-button {
+  padding: 0 1.875rem 0 0.125rem;
+}
+.main-panel-container .panel-container .panel .input-toggle-container label {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 1.25rem;
+  background-color: #bbb7b7;
+  margin: 0;
+  padding: 0 2px;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+}
+.main-panel-container .panel-container .panel .input-toggle-container label .lbl-toggle-button {
+  position: absolute;
+  width: 100%;
+  background-color: transparent;
+  font-size: 0.55rem;
+  padding: 0 0.125rem 0 1.875rem;
+  color: rgba(0, 0, 0, 0.9);
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  line-height: 10px;
+}
+.main-panel-container .panel-container .panel .input-toggle-container label .input-toggle-button {
+  position: absolute;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition: ease 0.2s;
+  left: 1px;
+  top: 50%;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+.main-panel-container .panel-container .panel .mochi-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.main-panel-container .panel-container .panel .mochi-button .mochi-button-decorator {
+  font-weight: bold;
+  cursor: pointer;
+  transition: all ease 0.1s;
+  font-size: 22px;
+}
+.main-panel-container .panel-container .panel .mochi-button button {
+  background-color: transparent;
+  border: 0;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  cursor: pointer;
+  font-weight: 600;
+}
+.main-panel-container .panel-container .panel .mochi-button.disabled,
+.main-panel-container .panel-container .panel .mochi-button.disabled .mochi-button-decorator,
+.main-panel-container .panel-container .panel .mochi-button.disabled button {
+  pointer-events: none;
+}
+.main-panel-container .panel-container .panel .mochi-button.disabled button {
+  color: rgba(0, 0, 0, 0.4);
+}
+.main-panel-container .panel-container .panel .mochi-button:hover:not(.disabled) .mochi-button-decorator {
+  color: rgba(0, 0, 0, 0.7);
+}
+.main-panel-container .panel-container .panel .mochi-button:active:not(.disabled) .mochi-button-decorator-left {
+  -webkit-transform: translateX(-4px);
+  -moz-transform: translateX(-4px);
+  -o-transform: translateX(-4px);
+  -ms-transform: translateX(-4px);
+  transform: translateX(-4px);
+}
+.main-panel-container .panel-container .panel .mochi-button:active:not(.disabled) .mochi-button-decorator-right {
+  -webkit-transform: translateX(4px);
+  -moz-transform: translateX(4px);
+  -o-transform: translateX(4px);
+  -ms-transform: translateX(4px);
+  transform: translateX(4px);
+}

@@ -1,0 +1,506 @@
+@topBarBg: #4b4b4b;
+@inputLabelColor: rgba(0, 0, 0, 0.7);
+@labelColor: rgba(0, 0, 0, 0.9);
+
+.geofence-bar.shown{
+	left: 20px;
+}
+.geofence-bar.hidden{
+	left: -100%;
+}
+
+.geofence-bar {
+	position: absolute;
+	top: 50%;
+	width: 200px;
+	height: 70%;
+	transition: left ease 0.3s;
+	transform: translateY(-50%);
+	background-color: rgb(231, 231, 231);
+	z-index: 1000;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.7);
+
+	.geofence-bar-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		border-radius: inherit;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		padding: 15px 5px;
+
+		.title {
+			font-weight: bold;
+			font-size: 20px;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			width: 100%;
+			text-align: center;
+			margin-bottom: 10px;
+		}
+
+		.btn-drawing-container {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+
+			.row {
+				display: flex;
+				justify-content: space-around;
+				padding: 4px;
+				width: 100%;
+
+				.btn-draw-geofence {
+					width: 55px;
+					height: 55px;
+					padding: 4px;
+					font-size: 24px;
+					border-radius: 10px;
+					margin-bottom: 15px;
+					cursor: pointer;
+					transition: all ease 0.3s;
+					/*box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.2);*/
+					box-shadow: -2px -2px 5px 1px rgba(255,255,255,0.5), 2px 2px 3px 1px rgba(0,0,0,0.5);
+					background-color: transparent;
+				}
+				.btn-draw-geofence.disabled {
+					pointer-events: none;
+					color: rgba(0, 0, 0, 0.3);
+					box-shadow: inset -2px -2px 5px 1px rgba(255,255,255,0.5), inset 2px 2px 3px 1px rgba(0,0,0,0.5);
+				}
+				.btn-draw-geofence.drawing {
+					animation-name: isDrawing;
+					animation-duration: 1s;
+					animation-timing-function: linear;
+					animation-iteration-count: infinite;
+
+					-webkit-animation-name: isDrawing;
+					-webkit-animation-duration: 1s;
+					-webkit-animation-timing-function: linear;
+					-webkit-animation-iteration-count: infinite;
+				}
+				.btn-draw-geofence:hover {
+					box-shadow: -2px -2px 5px 2px rgba(255,255,255,0.57), 3px 3px 3px 1px rgba(0,0,0,1);
+				}
+
+				@-moz-keyframes isDrawing {
+					0% {
+						opacity: 1;
+					}
+					50% {
+						opacity: 0;
+					}
+					100% {
+						opacity: 1;
+					}
+				}
+
+				@-webkit-keyframes isDrawing {
+					0% {
+						opacity: 1;
+					}
+					50% {
+						opacity: 0;
+					}
+					100% {
+						opacity: 1;
+					}
+				}
+
+				@keyframes isDrawing {
+					0% {
+						opacity: 1;
+					}
+					50% {
+						opacity: 0;
+					}
+					100% {
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		.geofences-info{
+			display: flex;
+			flex-direction: column;
+			font-size: 12px;
+			margin-top: 10px;
+
+			.row-info.shown{
+				display: flex !important;
+			}
+
+			.row-info{
+				display: none;
+				justify-content: space-between;				
+				margin-bottom: 10px;
+
+				.header{
+					font-weight: 600;
+					margin-right: 5px;
+				}
+
+				.coords{
+					display: flex;
+					flex-direction: column;
+
+					.coord{
+						display: flex;
+						justify-content: flex-end;
+					}
+				}
+			}
+		}
+
+		.filler {
+			flex-grow: 1;
+		}
+
+		.btn-area {
+			border-top: 1px solid rgba(0, 0, 0, 0.3);
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			padding-top: 5px;
+			flex-grow: unset !important;
+
+			.mochi-button {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+
+				.mochi-button-decorator {
+					font-weight: bold;
+					cursor: pointer;
+					transition: all ease 0.1s;
+					font-size: 22px;
+				}
+
+				button {
+					background-color: transparent;
+					border: 0;
+					margin: 0 !important;
+					padding: 0 10px !important;
+					cursor: pointer;
+					font-weight: 600;
+				}
+			}
+
+			.mochi-button.active{
+				color: green;
+			}
+
+			.mochi-button.disabled,
+			.mochi-button.disabled .mochi-button-decorator,
+			.mochi-button.disabled button {
+				pointer-events: none;
+			}
+
+			.mochi-button.disabled button {
+				color: rgba(0, 0, 0, 0.4);
+			}
+
+			.mochi-button:hover:not(.disabled) .mochi-button-decorator {
+				color: rgba(0, 0, 0, 0.7);
+			}
+
+			.mochi-button:active:not(.disabled) .mochi-button-decorator-left {
+				-webkit-transform: translateX(-4px);
+				-moz-transform: translateX(-4px);
+				-o-transform: translateX(-4px);
+				-ms-transform: translateX(-4px);
+				transform: translateX(-4px);
+			}
+
+			.mochi-button:active:not(.disabled) .mochi-button-decorator-right {
+				-webkit-transform: translateX(4px);
+				-moz-transform: translateX(4px);
+				-o-transform: translateX(4px);
+				-ms-transform: translateX(4px);
+				transform: translateX(4px);
+			}
+		}
+
+		.input-box-container.disabled,
+		.select-box-container.disabled {
+			pointer-events: none;
+		}
+
+		.input-box-container.disabled label,
+		.select-box-container.disabled label {
+			color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .textarea-box-container{
+            border: 1px solid rgba(0, 0, 0, 0.5);
+			border-radius: 15px;			
+			position: relative;
+			background-color: transparent;
+			padding: 0;
+			display: flex;
+			flex-wrap: wrap;
+			min-height: 2rem;
+            font-family: "Hind Madurai", sans-serif !important;
+            
+            label {
+				background-color: transparent;
+				font-size: 0.75rem;
+				width: 100%;
+                color: @inputLabelColor;
+				font-style: italic;
+				padding: 0 10px;
+				white-space: nowrap;
+				position: absolute;
+				top: 15px;
+				left: 0;
+				transform: translateY(-50%);
+				transition: all 0.2s;
+				cursor: text;
+				margin: 0;
+            }
+            
+            textarea:valid + label,
+			textarea:focus + label {
+				top: 5px;
+				color: darkred;
+				font-size: 0.65rem;
+			}
+			textarea:read-only + label {
+				top: 5px;
+				color: darkred;
+				font-size: 0.65rem;
+			}
+
+			textarea {
+				background-color: transparent;
+				border: 1px solid transparent;
+                width: 100%;
+                max-height: 150px;
+                min-height: 150px;
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-top: 15px;
+				text-align: left;
+                font-size: 0.7rem;
+				resize: none;
+				font-family: 'Ubuntu', sans-serif;
+			}
+        }
+
+		.input-box-container,
+		.select-box-container {
+			border: 1px solid rgba(0, 0, 0, 0.5);
+			border-radius: 45px;			
+			position: relative;
+			background-color: transparent;
+			padding: 0;
+			display: flex;
+			flex-wrap: wrap;
+			min-height: 2rem;
+			font-family: "Hind Madurai", sans-serif !important;
+
+			.arrow-icon {
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%;);
+				color: rgba(0, 0, 0, 0.5);
+			}
+
+			.search-icon,
+			.clear-search-icon {
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+				-webkit-transform: translateY(-50%);
+				color: rgba(0, 0, 0, 0.3);
+			}
+
+			.search-icon {
+				cursor: pointer;
+				transition: ease all 0.2s;
+			}
+
+			.search-icon:hover {
+				color: rgba(0, 0, 0, 0.7);
+			}
+
+			.clear-search-icon {
+				right: 35px;
+				font-size: 12px;
+				cursor: pointer;
+				transition: ease all 0.2s;
+				color: rgba(0, 0, 0, 0.5);
+			}
+
+			.clear-search-icon.hidden {
+				display: none;
+			}
+
+			.clear-search-icon:hover {
+				color: rgba(0, 0, 0, 0.7);
+			}
+
+			label {
+				background-color: transparent;
+				font-size: 0.75rem;
+				width: 100%;
+                color: @inputLabelColor;
+				font-style: italic;
+				padding: 0 10px;
+				white-space: nowrap;
+				position: absolute;
+				top: 50%;
+				left: 0;
+				transform: translateY(-50%);
+				transition: all 0.2s;
+				cursor: text;
+				margin: 0;
+			}
+
+			input[type="search"] {
+				padding-right: 50px !important;
+			}
+
+			input[type="search"]::-webkit-search-decoration,
+			input[type="search"]::-webkit-search-cancel-button {
+				-webkit-appearance: none;
+			}
+
+			input:valid + label,
+			input:focus + label {
+				top: 5px;
+				color: darkred;
+				font-size: 0.65rem;
+			}
+			input:read-only + label {
+				top: 5px;
+				color: darkred;
+				font-size: 0.65rem;
+			}
+
+			input {
+				background-color: transparent;
+				border: 1px solid transparent;
+				width: 100%;
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-top: 10px;
+				text-align: left;
+				font-size: 0.7rem;
+			}
+
+			input[data-type="email"] {
+				text-transform: lowercase;
+			}
+
+			input[data-type="license-plate"] {
+				text-transform: uppercase;
+			}
+
+			input[data-type="name"] {
+				text-transform: capitalize;
+			}
+
+			select {
+				background-color: transparent;
+				border: 1px solid transparent;
+				width: calc(100% - 2px);
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-top: 10px;
+				text-align: center;
+				font-size: 0.7rem;
+			}
+
+			select:valid + label,
+			select:focus + label {
+				top: 4px;
+				font-size: 0.65rem;
+				color: darkred;
+			}
+		}
+
+		.input-toggle-container.disabled {
+			pointer-events: none;
+		}
+
+		.input-toggle-container.disabled .lbl-toggle-button {
+			color: rgba(0, 0, 0, 0.3);
+		}
+
+		.input-toggle-container {
+			min-width: 5.8rem;
+			max-width: 5.8rem;
+			height: 1.875rem;
+			position: relative;
+			margin: 0 2px;
+
+			input {
+				display: none;
+			}
+
+			input:checked + label {
+				background-color: #ffb80d;
+			}
+
+			input:checked + label .input-toggle-button {
+				left: ~"calc(100% - 1.8125rem)";
+			}
+
+			input:checked + label .lbl-toggle-button {
+				padding: 0 1.875rem 0 0.125rem;
+			}
+
+			label {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				border: 1px solid rgba(0, 0, 0, 0.3);
+				border-radius: 1.25rem;
+				background-color: #bbb7b7;
+				margin: 0;
+				padding: 0 2px;
+				display: block;
+				overflow: hidden;
+				cursor: pointer;
+
+				.lbl-toggle-button {
+					position: absolute;
+					width: 100%;
+					background-color: transparent;
+					font-size: 0.55rem;
+					padding: 0 0.125rem 0 1.875rem;
+					color: @labelColor;
+					font-style: italic;
+					margin: 0;
+					text-align: center;
+					top: 50%;
+					transform: translateY(-50%);
+					-webkit-transform: translateY(-50%);
+					line-height: 10px;
+				}
+
+				.input-toggle-button {
+					position: absolute;
+					width: 1.75rem;
+					height: 1.75rem;
+					border-radius: 50%;
+					background-color: #fff;
+					box-sizing: border-box;
+					transition: ease 0.2s;
+					left: 1px;
+					top: 50%;
+					box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+					transform: translateY(-50%);
+					-webkit-transform: translateY(-50%);
+				}
+			}
+		}
+	}
+}

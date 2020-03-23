@@ -1,0 +1,500 @@
+@topBarBg: #4b4b4b;
+@inputLabelColor: rgba(0, 0, 0, 0.7);
+@labelColor: rgba(0, 0, 0, 0.9);
+
+.main-panel-container.hidden {
+	left: -100%;
+}
+
+.main-panel-container.shown {
+	left: 0;
+}
+
+.main-panel-container {
+	position: absolute !important;
+	width: 900px;
+	height: 100%;
+	top: 0;
+	border-radius: 0 45px 0 0;
+	background-color: transparent;
+	z-index: 10;
+	padding-right: 5px;
+	transition: left ease 0.2s;
+
+	.panel-container {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		border-radius: 0 45px 0 0;
+
+		.gutter {
+			width: 0;
+			height: 100%;
+			position: absolute;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			z-index: 100;
+			border-radius: inherit;
+			cursor: pointer;
+		}
+
+		.panel {
+			box-shadow: 3px 0 3px rgba(0, 0, 0, 0.7);
+			width: 100%;
+			height: 100%;
+			left: -100%;
+			position: absolute;
+			border-left: 1px solid @topBarBg;
+			background: #ffffff;
+			border-radius: inherit;
+			background: -moz-radial-gradient(
+				center,
+				ellipse cover,
+				#ffffff 0%,
+				#ececec 100%
+			);
+			background: -webkit-radial-gradient(
+				center,
+				ellipse cover,
+				#ffffff 0%,
+				#ececec 100%
+			);
+			background: radial-gradient(ellipse at center, #ffffff 0%, #ececec 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ececec', GradientType=1);
+			overflow: hidden;
+			z-index: 8;
+
+			.panel-wrapper {
+				width: 100%;
+				height: 100%;
+				position: relative;					
+
+				.nub {
+					background: url("/img/panel-nub.svg");
+					width: 36px;
+					height: 130px;
+					position: absolute;
+					right: -36px;
+					bottom: 10px;
+					background-position-x: -1px;
+					cursor: move;
+				}
+
+				.panel-content {
+					width: 100%;
+					height: 100%;
+					position: relative;
+					padding: 0 10px 10px 10px;
+					background-color: inherit;
+					display: flex;
+					flex-direction: column;
+
+					.panel-title {
+						font-family: "Ubuntu", sans-serif;
+						font-weight: 300;
+						font-size: 40px;
+						position: relative;
+						margin-top: 55px;
+
+						background: rgb(184, 184, 184);
+						background: linear-gradient(
+							270deg,
+							rgba(255, 255, 255, 1) 0%,
+							rgb(238, 238, 238) 50%,
+							rgb(230, 230, 230) 100%
+						);
+
+						.border-bottom {
+							position: absolute;
+							width: 100%;
+							height: 2px;
+							bottom: 0;
+							left: 0;
+							background: rgb(184, 184, 184);
+							background: linear-gradient(
+								270deg,
+								rgba(184, 184, 184, 1) 0%,
+								rgba(228, 228, 228, 1) 50%,
+								rgba(255, 255, 255, 1) 100%
+							);
+						}
+
+						.border-top {
+							position: absolute;
+							width: 100%;
+							height: 2px;
+							top: 0;
+							left: 0;
+							background: rgb(184, 184, 184);
+							background: linear-gradient(
+								270deg,
+								rgba(184, 184, 184, 1) 0%,
+								rgba(228, 228, 228, 1) 50%,
+								rgba(255, 255, 255, 1) 100%
+							);
+						}
+					}
+
+					.content {
+						flex-grow: 1;
+						padding-top: 10px;
+						padding-right: 20px;
+						position: relative;
+						display: flex;
+						flex-direction: column;
+					}
+
+					.panel-close-btn {
+						position: absolute;
+						right: 25px;
+						top: 5px;
+						cursor: pointer;
+						transition: ease 0.3s;
+					}
+
+					.panel-close-btn:hover i {
+						filter: brightness(90%);
+					}
+
+					.panel-not-focused {
+						position: absolute;
+						height: 100%;
+						width: 100%;
+						background-color: rgba(0, 0, 0, 0.2);
+						left: 0;
+						top: 0;
+						bottom: 0;
+						right: 0;
+						display: none;
+					}
+
+					.panel-selection-handler {
+						position: absolute;
+						height: 100%;
+						width: 100%;
+						background-color: transparent;
+						left: 0;
+						top: 0;
+						bottom: 0;
+						right: 0;
+						cursor: pointer;
+						z-index: 10;
+						transition: background-color 0.2s;
+						display: none;
+					}
+
+					.panel-selection-handler:hover {
+						background-color: rgba(0, 0, 0, 0.1);
+					}
+
+					.drag-handler {
+						position: absolute;
+						height: 100%;
+						width: 32px;
+						right: 0;
+						top: 0;
+						bottom: 0;
+						cursor: grab;
+						z-index: 7;
+					}
+					.drag-handler:hover {
+						/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#eeeeee+0,e5e5e5+100 */
+						background: #eeeeee; /* Old browsers */
+						background: -moz-linear-gradient(
+							left,
+							#eeeeee 0%,
+							#e5e5e5 100%
+						); /* FF3.6-15 */
+						background: -webkit-linear-gradient(
+							left,
+							#eeeeee 0%,
+							#e5e5e5 100%
+						); /* Chrome10-25,Safari5.1-6 */
+						background: linear-gradient(
+							to right,
+							#f1f0f0 0%,
+							#b6b6b6 100%
+						); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#e5e5e5',GradientType=1 ); /* IE6-9 */
+					}
+				}
+			}
+
+			.input-box-container.disabled,
+			.select-box-container.disabled {
+				pointer-events: none;
+			}
+
+			.input-box-container.disabled label,
+			.select-box-container.disabled label {
+				color: rgba(0, 0, 0, 0.3);
+			}
+
+			.input-box-container,
+			.select-box-container {
+				border: 1px solid rgba(0, 0, 0, 0.5);
+				border-radius: 45px;
+				// overflow: hidden;
+				position: relative;
+				background-color: transparent;
+				padding: 0;
+				display: flex;
+				flex-wrap: wrap;
+				min-height: 2rem;
+				font-family: "Hind Madurai", sans-serif !important;
+
+				.arrow-icon {
+					position: absolute;
+					right: 10px;
+					top: 50%;
+					transform: translateY(-50%;);
+					color: rgba(0, 0, 0, 0.5);
+				}
+
+				.search-icon,
+				.clear-search-icon {
+					position: absolute;
+					right: 10px;
+					top: 50%;
+					transform: translateY(-50%);
+					-webkit-transform: translateY(-50%);
+					color: rgba(0, 0, 0, 0.3);
+				}
+
+				.search-icon{
+					cursor: pointer;
+					transition: ease all 0.2s;
+				}
+
+				.search-icon:hover{
+					color: rgba(0, 0, 0, 0.7);
+				}
+
+				.clear-search-icon {
+					right: 35px;
+					font-size: 12px;
+					cursor: pointer;
+					transition: ease all 0.2s;
+					color: rgba(0, 0, 0, 0.5);
+				}
+
+				.clear-search-icon.hidden {
+					display: none;
+				}
+
+				.clear-search-icon:hover {
+					color: rgba(0, 0, 0, 0.7);
+				}
+
+				label {
+					background-color: transparent;
+					font-size: 0.75rem;
+					width: 100%;
+					color: @inputLabelColor;
+					font-style: italic;
+					padding: 0 10px;
+					white-space: nowrap;
+					position: absolute;
+					top: 50%;
+					left: 0;
+					transform: translateY(-50%);
+					transition: all 0.2s;
+					cursor: text;
+					margin: 0;
+				}
+
+				input[type="search"] {
+					padding-right: 50px !important;
+				}
+
+				input[type="search"]::-webkit-search-decoration,
+				input[type="search"]::-webkit-search-cancel-button {
+					-webkit-appearance: none;
+				}
+
+				input:valid + label,
+				input:focus + label {
+					top: 5px;
+					color: darkred;
+					font-size: 0.65rem;
+				}
+				input:read-only + label {
+					top: 5px;
+					color: darkred;
+					font-size: 0.65rem;
+				}
+
+				input {
+					background-color: transparent;
+					border: 1px solid transparent;
+					width: 100%;
+					padding-left: 10px;
+					padding-right: 10px;
+					padding-top: 10px;
+					text-align: left;
+					font-size: 0.7rem;
+				}
+
+				input[data-type="email"] {
+					text-transform: lowercase;
+				}
+
+				input[data-type="license-plate"] {
+					text-transform: uppercase;
+				}
+
+				input[data-type="name"] {
+					text-transform: capitalize;
+				}
+
+				select {
+					background-color: transparent;
+					border: 1px solid transparent;
+					width: calc(100% - 2px);
+					padding-left: 10px;
+					padding-right: 10px;
+					padding-top: 10px;
+					text-align: center;
+					font-size: 0.7rem;
+				}
+
+				select:valid + label,
+				select:focus + label {
+					top: 4px;
+					font-size: 0.65rem;
+					color: darkred;
+				}
+			}
+
+			.input-toggle-container.disabled {
+				pointer-events: none;
+			}
+
+			.input-toggle-container.disabled .lbl-toggle-button {
+				color: rgba(0, 0, 0, 0.3);
+			}
+
+			.input-toggle-container {
+				min-width: 5.8rem;
+				max-width: 5.8rem;
+				height: 1.875rem;
+				position: relative;
+				margin: 0 2px;
+
+				input {
+					display: none;
+				}
+
+				input:checked + label {
+					background-color: #ffb80d;
+				}
+
+				input:checked + label .input-toggle-button {
+					left: ~"calc(100% - 1.8125rem)";
+				}
+
+				input:checked + label .lbl-toggle-button {
+					padding: 0 1.875rem 0 0.125rem;
+				}
+
+				label {
+					position: relative;
+					width: 100%;
+					height: 100%;
+					border: 1px solid rgba(0, 0, 0, 0.3);
+					border-radius: 1.25rem;
+					background-color: #bbb7b7;
+					margin: 0;
+					padding: 0 2px;
+					display: block;
+					overflow: hidden;
+					cursor: pointer;
+
+					.lbl-toggle-button {
+						position: absolute;
+						width: 100%;
+						background-color: transparent;
+						font-size: 0.55rem;
+						padding: 0 0.125rem 0 1.875rem;
+						color: @labelColor;
+						font-style: italic;
+						margin: 0;
+						text-align: center;
+						top: 50%;
+						transform: translateY(-50%);
+						-webkit-transform: translateY(-50%);
+						line-height: 10px;
+					}
+
+					.input-toggle-button {
+						position: absolute;
+						width: 1.75rem;
+						height: 1.75rem;
+						border-radius: 50%;
+						background-color: #fff;
+						box-sizing: border-box;
+						transition: ease 0.2s;
+						left: 1px;
+						top: 50%;
+						box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+						transform: translateY(-50%);
+						-webkit-transform: translateY(-50%);
+					}
+				}
+			}
+
+			.mochi-button {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+
+				.mochi-button-decorator {
+					font-weight: bold;
+					cursor: pointer;
+					transition: all ease 0.1s;
+					font-size: 22px;
+				}
+
+				button {
+					background-color: transparent;
+					border: 0;
+					margin: 0 !important;
+					padding: 0 10px !important;
+					cursor: pointer;
+					font-weight: 600;
+				}
+			}
+
+			.mochi-button.disabled,
+			.mochi-button.disabled .mochi-button-decorator,
+			.mochi-button.disabled button {
+				pointer-events: none;
+			}
+
+			.mochi-button.disabled button {
+				color: rgba(0, 0, 0, 0.4);
+			}
+
+			.mochi-button:hover:not(.disabled) .mochi-button-decorator {
+				color: rgba(0, 0, 0, 0.7);
+			}
+
+			.mochi-button:active:not(.disabled) .mochi-button-decorator-left {
+				-webkit-transform: translateX(-4px);
+				-moz-transform: translateX(-4px);
+				-o-transform: translateX(-4px);
+				-ms-transform: translateX(-4px);
+				transform: translateX(-4px);
+			}
+
+			.mochi-button:active:not(.disabled) .mochi-button-decorator-right {
+				-webkit-transform: translateX(4px);
+				-moz-transform: translateX(4px);
+				-o-transform: translateX(4px);
+				-ms-transform: translateX(4px);
+				transform: translateX(4px);
+			}
+		}
+	}
+}
