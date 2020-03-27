@@ -49,20 +49,19 @@
 .geofence-bar .geofence-bar-wrapper .btn-drawing-container .row .btn-draw-geofence {
   width: 55px;
   height: 55px;
-  padding: 4px;
-  font-size: 24px;
-  border-radius: 10px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 50%;
   margin-bottom: 15px;
   cursor: pointer;
   transition: all ease 0.3s;
   /*box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.2);*/
-  box-shadow: -2px -2px 5px 1px rgba(255, 255, 255, 0.5), 2px 2px 3px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset -3px -3px 5px 1px rgba(255, 255, 255, 0.5), inset 3px 3px 3px 1px rgba(0, 0, 0, 0.5);
   background-color: transparent;
 }
 .geofence-bar .geofence-bar-wrapper .btn-drawing-container .row .btn-draw-geofence.disabled {
   pointer-events: none;
   color: rgba(0, 0, 0, 0.3);
-  box-shadow: inset -2px -2px 5px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 3px 1px rgba(0, 0, 0, 0.5);
 }
 .geofence-bar .geofence-bar-wrapper .btn-drawing-container .row .btn-draw-geofence.drawing {
   animation-name: isDrawing;
@@ -75,7 +74,7 @@
   -webkit-animation-iteration-count: infinite;
 }
 .geofence-bar .geofence-bar-wrapper .btn-drawing-container .row .btn-draw-geofence:hover {
-  box-shadow: -2px -2px 5px 2px rgba(255, 255, 255, 0.57), 3px 3px 3px 1px #000000;
+  box-shadow: -3px -3px 5px 1px rgba(255, 255, 255, 0.5), 3px 3px 3px 1px rgba(0, 0, 0, 0.5);
 }
 @-moz-keyframes isDrawing {
   0% {
@@ -213,6 +212,7 @@
   flex-wrap: wrap;
   min-height: 2rem;
   font-family: "Hind Madurai", sans-serif !important;
+  margin-bottom: 5px;
 }
 .geofence-bar .geofence-bar-wrapper .textarea-box-container label {
   background-color: transparent;

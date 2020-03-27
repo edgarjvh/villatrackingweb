@@ -10,6 +10,7 @@ import DevicesPanel from './../devices/devices';
 import ClientsPanel from './../clients/clients';
 import VehiclesPanel from './../vehicles/vehicles';
 import DevicesModelsPanel from '../devices_models/devices_models';
+import GeofencesPanel from '../geofences/geofences';
 
 const INITIAL_STATE = {    
 
@@ -255,7 +256,8 @@ export default class PanelContainer extends Component {
                                             item.type === 'clients' ? <ClientsPanel key={item.id} pid={item.id} cid={item.cid} ref={(clients) => { window.clients = clients }} /> :
                                                 item.type === 'vehicles' ? <VehiclesPanel key={item.id} pid={item.id} ref={(vehicles) => { window.vehicles = vehicles }} vid={item.vid} /> :
                                                     item.type === 'devices-models' ? <DevicesModelsPanel key={item.id} pid={item.id} ref={(devices_models) => { window.devices_models = devices_models }} mid={item.mid} /> :
-                                                        ''
+                                                        item.type === 'geofences' ? <GeofencesPanel key={item.id} pid={item.id} ref={(geofences) => { window.geofences = geofences }} gid={item.gid} /> :
+                                                            ''
                         ))
                     }
                 </div>

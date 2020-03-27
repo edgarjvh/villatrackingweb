@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { Map, TileLayer, Popup, Marker, ZoomControl, LayersControl, Polygon, Circle } from 'react-leaflet'
+import React, {createRef, Component } from 'react'
+import { Map, TileLayer, Popup, Marker, ZoomControl, LayersControl, Polygon, Circle, Icon } from 'react-leaflet'
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 import classNames from 'classnames';
 import L from 'leaflet-geometryutil'
 import './map.css'
 import { LatLng } from 'leaflet';
-
-const puntos = '[{"lat":10.409101911265005,"lng":-71.45042181015016},{"lat":10.4073291249916,"lng":-71.45645141601564},{"lat":10.403720207521706,"lng":-71.45479917526247},{"lat":10.401841865539986,"lng":-71.45074367523195}]';
 
 const INITIAL_STATE = {
   lat: 10.405126,
@@ -29,26 +27,13 @@ const INITIAL_STATE = {
 export default class MainMap extends Component {
   state = INITIAL_STATE;
 
+  mapRef = createRef(Map);
 
   constructor() {
     super()
+  }  
 
-    console.log(L);
-  }
-
-  componentDidMount(){
-    // const parsed = JSON.parse(puntos);
-
-    // const points = parsed.map(point => {
-    //   console.log(point);
-    //   return new LatLng(point.lat, point.lng);
-    // })
-    // console.log(points);
-
-    // this.setState({points});    
-  }
-
-  mapClick = async (e) => {
+  mapClick = async (e) => {    
 
     let coord = e.latlng;
 
@@ -66,9 +51,7 @@ export default class MainMap extends Component {
           const points = [...state.points, new LatLng(coord.lat, coord.lng)];
           window.geofencesBar.updateState({ points, showPolygon: true });
           return { points, showPolygon: true };
-        });
-
-        console.log(JSON.stringify(this.state.points));
+        });        
       }
   
       if (this.state.isDrawingCircle) {
@@ -76,6 +59,9 @@ export default class MainMap extends Component {
           if (!state.center || (state.center.lat === 0 || state.center.lng === 0)) {
             const center = coord;
             window.geofencesBar.updateState({ center });
+
+
+            this.mapRef.current.leafletElement.setView(center,this.mapRef.current.leafletElement.getZoom());
             return { center };
           } else {
             const radius = state.center.distanceTo([coord.lat, coord.lng]);
@@ -104,8 +90,12 @@ export default class MainMap extends Component {
     return inside;
   }
 
-  updateState = state => {
-    this.setState(state);
+  updateState = async state => {
+    await this.setState(state);
+
+    if(this.state.showCircle && (this.state.center.lat !== 0 && this.state.center.lng !== 0)){
+      this.mapRef.current.leafletElement.setView(this.state.center,this.mapRef.current.leafletElement.getZoom());
+    }
   }
 
   resetState = () => {
@@ -123,38 +113,39 @@ export default class MainMap extends Component {
     });
 
     return (
-      <Map center={position} zoom={this.state.zoom} zoomControl={false} onclick={this.mapClick} >
+      <Map center={new LatLng(this.state.lat, this.state.lng)} zoom={this.state.zoom} zoomControl={false} onclick={this.mapClick} ref={this.mapRef} >
 
-        <Polygon classNames={showingPolygonClasses} positions={this.state.points} color={this.state.color} fillColor={this.state.fillColor} opacity={this.state.opacity} />;
+        {
+          this.state.showPolygon ? 
+          <Polygon classNames={showingPolygonClasses} positions={this.state.points} color={this.state.color} fillColor={this.state.fillColor} opacity={this.state.opacity} /> :
+          ''
+        }
 
-        <Circle classNames={showingCircleClasses} center={this.state.center} radius={this.state.radius} color={this.state.color} fillColor={this.state.fillColor} opacity={this.state.opacity} />
+        {
+          this.state.showCircle ?
+          <Circle classNames={showingCircleClasses} center={this.state.center} radius={this.state.radius} color={this.state.color} fillColor={this.state.fillColor} opacity={this.state.opacity} /> :
+          ''
+        }
+
 
         <ZoomControl position="bottomright" />
 
         <LayersControl position="bottomright">
           <LayersControl.BaseLayer name="Carretera" checked>
             <ReactLeafletGoogleLayer
-              // useGoogMapsLoader={true}
-              // googleMapsLoaderConf={{KEY: 'AIzaSyBnB7PxTSDgfjCcLzkdaytJLQ26-cjcPDQ'}}
+              googleMapsLoaderConf={{KEY: 'AIzaSyA3aZ3j-w2s2lwzMLA4qudEGEQ1zzDE_7I'}}
               type={'roadmap'}
             />
-
-            {/* <TileLayer
-              attribution='<a href="mailto:ceo@villasoftgps.com.ve">ceo@villasoftgps.com.ve<a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            /> */}
           </LayersControl.BaseLayer>
 
           <LayersControl.BaseLayer name="Satelite">
             <ReactLeafletGoogleLayer
-              // googleMapsLoaderConf={{KEY: 'AIzaSyA3aZ3j-w2s2lwzMLA4qudEGEQ1zzDE_7I'}}
               type={'satellite'}
             />
           </LayersControl.BaseLayer>
 
           <LayersControl.BaseLayer name="Hibrido">
             <ReactLeafletGoogleLayer
-              // googleMapsLoaderConf={{KEY: 'AIzaSyA3aZ3j-w2s2lwzMLA4qudEGEQ1zzDE_7I'}}
               type={'hybrid'}
             />
           </LayersControl.BaseLayer>

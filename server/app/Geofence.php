@@ -13,4 +13,6 @@ class Geofence extends Model
             ->withPivot(['last_status', 'date_time'])
             ->withTimestamps();
     }
+
+    
 }

@@ -206,14 +206,102 @@ export default class Menu extends Component {
         });
 
         btnGeofences.addEventListener('click', event => {
-            window.main.setGeofenceState();
+            let mainState = window.main.getState();
+
+            if (!mainState.isShowingGeofences){
+                let panelState = window.panelContainer.getState();
+    
+                let exist = false;
+    
+                for (let i = 0; i < panelState.panels.length; i++) {
+                    if (panelState.panels[i].id === 'panel-geofences') {
+                        window.panelContainer.panelToFront('panel-geofences');
+                        exist = true;
+                        break;
+                    }
+                }
+    
+                if (!exist) {
+                    window.panelContainer.addPanel({ id: 'panel-geofences', type: 'geofences', gid: -1});
+                }                
+            }
         });
     }
 
     render() {
+        const btnUsersClasses = classNames({
+            'btn': true,
+            'btn-users': true,
+            'disabled': this.props.isShowingGeofences
+        });
         const btnGeofencesClasses = classNames({
             'btn': true,
             'btn-geofences': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnClientsClasses = classNames({
+            'btn': true,
+            'btn-clients': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnDealersClasses = classNames({
+            'btn': true,
+            'btn-dealers': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnDriversClasses = classNames({
+            'btn': true,
+            'btn-drivers': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnVehiclesClasses = classNames({
+            'btn': true,
+            'btn-vehicles': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnSimCardsClasses = classNames({
+            'btn': true,
+            'btn-simcards': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnDevicesModelsClasses = classNames({
+            'btn': true,
+            'btn-devices-models': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnDevicesClasses = classNames({
+            'btn': true,
+            'btn-devices': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnDrivingHistoryClasses = classNames({
+            'btn': true,
+            'btn-driving-history': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnAlertHistoryClasses = classNames({
+            'btn': true,
+            'btn-alert-history': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnReportsClasses = classNames({
+            'btn': true,
+            'btn-reports': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnPermissionsClasses = classNames({
+            'btn': true,
+            'btn-permissions': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnWindowsClasses = classNames({
+            'btn': true,
+            'btn-windows': true,
+            'disabled': this.props.isShowingGeofences
+        });
+        const btnPoisClasses = classNames({
+            'btn': true,
+            'btn-pois': true,
             'disabled': this.props.isShowingGeofences
         });
 
@@ -228,49 +316,49 @@ export default class Menu extends Component {
                     </div>
                 </div>
                 <div className="button-container">
-                    <div className="btn btn-users" title="Usuarios" id="btn-users">
+                    <div className={btnUsersClasses} title="Usuarios" id="btn-users">
                         <FontAwesomeIcon icon={faUsers} />
                     </div>
-                    <div className="btn btn-clients" title="Clientes" id="btn-clients">
+                    <div className={btnClientsClasses} title="Clientes" id="btn-clients">
                         <FontAwesomeIcon icon={faUserTie} />
                     </div>
-                    <div className="btn btn-dealers" title="Dealers" id="btn-dealers">
+                    <div className={btnDealersClasses} title="Dealers" id="btn-dealers">
                         <FontAwesomeIcon icon={faHandshake} />
                     </div>
-                    {/* <div className="btn btn-drivers" title="Conductores" id="btn-drivers">
+                    {/* <div className={btnDriversClasses} title="Conductores" id="btn-drivers">
                         <FontAwesomeIcon icon={faIdCardAlt} />
                     </div> */}
-                    <div className="btn btn-vehicles" title="Vehículos" id="btn-vehicles">
+                    <div className={btnVehiclesClasses} title="Vehículos" id="btn-vehicles">
                         <FontAwesomeIcon icon={faCar} />
                     </div>
-                    <div className="btn btn-simcards" title="Sim Cards" id="btn-simcards">
+                    <div className={btnSimCardsClasses} title="Sim Cards" id="btn-simcards">
                         <FontAwesomeIcon icon={faSimCard} />
                     </div>
-                    <div className="btn btn-devices-models" title="Modelos de Dispositivos" id="btn-devices-models">
+                    <div className={btnDevicesModelsClasses} title="Modelos de Dispositivos" id="btn-devices-models">
                         <FontAwesomeIcon icon={faMobile} />
                     </div>
-                    <div className="btn btn-devices" title="Dispositivos Gps" id="btn-devices">
+                    <div className={btnDevicesClasses} title="Dispositivos Gps" id="btn-devices">
                         <FontAwesomeIcon icon={faSatellite} />
                     </div>
                     <div className={btnGeofencesClasses} title="Geocercas" id="btn-geofences">
                         <FontAwesomeIcon icon={faMapSigns} />
                     </div>
-                    <div className="btn btn-driving-history" title="Historial de Recorrido">
+                    <div className={btnDrivingHistoryClasses} title="Historial de Recorrido">
                         <FontAwesomeIcon icon={faRoute} />
                     </div>
-                    <div className="btn btn-alert-history" title="Historial de Alertas">
+                    <div className={btnAlertHistoryClasses} title="Historial de Alertas">
                         <FontAwesomeIcon icon={faExclamationTriangle} />
                     </div>
-                    <div className="btn btn-reports" title="Informes">
+                    <div className={btnReportsClasses} title="Informes">
                         <FontAwesomeIcon icon={faFileAlt} />
                     </div>
-                    <div className="btn btn-permissions" title="Permisos">
+                    <div className={btnPermissionsClasses} title="Permisos">
                         <FontAwesomeIcon icon={faUserLock} />
                     </div>
-                    <div className="btn btn-windows" title="Ventanas">
+                    <div className={btnWindowsClasses} title="Ventanas">
                         <FontAwesomeIcon icon={faLayerGroup} />
                     </div>
-                    <div className="btn btn-pois" title="Puntos de Interés">
+                    <div className={btnPoisClasses} title="Puntos de Interés">
                         <FontAwesomeIcon icon={faMapMarkedAlt} />
                     </div>
                 </div>

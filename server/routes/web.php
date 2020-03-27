@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/test', 'UsersController@test');
 
@@ -56,3 +58,6 @@ Route::post('/deleteDeviceModel', 'DevicesModelsController@deleteDeviceModel');
 
 // GEOFENCES
 Route::get('/getGeofences', 'GeofencesController@getGeofences');
+Route::post('/deleteGeofence', 'GeofencesController@deleteGeofence');
+Route::post('/saveGeofence', 'GeofencesController@saveGeofence');
+Route::post('/syncAsigned', 'GeofencesController@syncAsigned')->middleware('cors');
