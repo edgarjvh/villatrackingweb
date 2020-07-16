@@ -10,7 +10,7 @@ class VehiclesController extends Controller
     public function getVehicles(){
         $vehicles = Vehicle::with(['Client'])->orderBy('license_plate', 'ASC')->get();
         return response()->json(['result' => 'OK', 'vehicles' => $vehicles]);        
-    }
+    }    
 
     public function getVehiclesWithDevicesChildren(){
         $vehicles = Vehicle::with(['Client', 'devicesChildren'])->orderBy('license_plate', 'ASC')->get();
@@ -36,6 +36,9 @@ class VehiclesController extends Controller
             $vehicle->color = $request->color;
             $vehicle->observations = $request->observations;            
             $vehicle->status = $request->status;
+            $vehicle->icon_type = $request->icon_type;
+            $vehicle->icon_size_w = $request->icon_size_w;
+            $vehicle->icon_size_h = $request->icon_size_h;
             $vehicle->save();
 
             return response()->json(['result' => 'CREATED']);
@@ -57,7 +60,10 @@ class VehiclesController extends Controller
                 'year' => $request->year,
                 'color' => $request->color,
                 'observations' => $request->observations,                
-                'status' => $request->status
+                'status' => $request->status,
+                'icon_type' => $request->icon_type,
+                'icon_size_w' => $request->icon_size_w,
+                'icon_size_h' => $request->icon_size_h
             ));
 
             return response()->json(['result' => $vehicle == 1 ? 'UPDATED' : 'ERROR']);

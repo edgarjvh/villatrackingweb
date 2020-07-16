@@ -22,6 +22,10 @@ class Client extends Model
         return $this->hasMany(Vehicle::class);
     }
 
+    public function vehiclesChildren(){
+        return $this->hasMany(Vehicle::class)->with(['devicesChildren']);
+    }
+
     public function contacts(){
         return $this->hasMany(Contact::class);
     }

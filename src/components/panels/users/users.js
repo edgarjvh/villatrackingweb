@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './users.css'
 import Config from './../../../config';
-import SimpleCrypto from 'simple-crypto-js';
+// import SimpleCrypto from 'simple-crypto-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSpinner, faSearch, faTimes, faSyncAlt, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
@@ -9,8 +9,8 @@ import classNames from 'classnames'
 import $ from 'jquery'
 
 const serverURL = Config.prototype.serverURL();
-const secret = '_villasecret';
-let crypto = new SimpleCrypto(secret);
+// const secret = '_villasecret';
+// let crypto = new SimpleCrypto(secret);
 const INITIAL_STATE = {
     // basic actions
     editing: false,
@@ -58,7 +58,7 @@ export default class UsersPanel extends Component {
     }
 
     getInitialState = () => {
-        const user = JSON.parse(crypto.decrypt(localStorage.getItem('user')));
+        const user = JSON.parse(localStorage.getItem('user'));
         const loggedUserId = user.id;
 
         INITIAL_STATE.loggedUserId = loggedUserId;

@@ -430,7 +430,7 @@ export default class ClientsPanel extends Component {
     onSubmit = async (e) => {
         e.preventDefault();
 
-        let clientList = $(e.target).closest('.panel').find('.tbl');
+        // let clientList = $(e.target).closest('.panel').find('.tbl');
 
         if (this.state.editing && !this.state.status) {
             if (!window.confirm(`
@@ -807,6 +807,8 @@ export default class ClientsPanel extends Component {
                 showingVehicles: true,
                 showingVehiclesList: client.vehicles
             });
+
+            return false;
         });
     }
 

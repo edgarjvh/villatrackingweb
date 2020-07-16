@@ -598,8 +598,10 @@ export default class DevicesPanel extends Component {
                 return device;
             });
 
-            this.state.devicesList = devicesList;
-            this.setState({ devicesShown: devicesList.length });
+            this.setState({
+                devicesList: devicesList,
+                devicesShown: devicesList.length
+            });            
 
         }, 400);
     }
@@ -1013,9 +1015,11 @@ export default class DevicesPanel extends Component {
                 device.isSelected = false;
                 return device;
             });
-
-            this.state.devicesList = devicesList;
-            this.setState({ devicesShown: devicesList.length });
+            
+            this.setState({
+                devicesList: devicesList,
+                devicesShown: devicesList.length 
+            });
 
         }, 400);        
     }

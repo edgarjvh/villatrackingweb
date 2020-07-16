@@ -394,6 +394,49 @@
 						background-color: rgba(0, 0, 0, 0.3);
 					}
 				}
+
+				.icons-container{
+					display: flex;
+					flex-direction: column;
+
+					.row{
+						display: flex;
+
+						.marker-icon{
+							display: flex;
+							align-items: center;
+							cursor: pointer;
+							padding: 1px 10px;							
+							border-radius: 5px;
+							margin: 1px;
+							transition: ease 0.3s;
+							justify-content: space-between;
+
+							img{
+								width: 100%;
+							}
+
+							.icon-default{
+								height: 30px;
+								width: 30px;
+							}
+						}
+
+						.marker-icon.selected{
+							background-color: #56aac4;
+						}
+
+						.marker-icon.default{
+							display: flex;
+							max-width: 300px;
+						}
+
+						.marker-icon:hover{
+							background-color: #56aac4;
+						}
+						
+					}
+				}
 			}
 			
 			.current-client.hidden{
@@ -527,7 +570,6 @@
 				padding-top: 5px;
 				flex-grow: unset !important;
             }
-
         }        
     }
 }

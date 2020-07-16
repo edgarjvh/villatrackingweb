@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './geofences_bar.css';
 import Config from './../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faSpinner, faSearch, faTimes, faDrawPolygon, faBroom, faBackspace } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faDrawPolygon, faBroom, faBackspace } from '@fortawesome/free-solid-svg-icons';
 import { faDotCircle } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames';
-import $ from 'jquery';
+// import $ from 'jquery';
 import { LatLng } from 'leaflet';
  
 const serverURL = Config.prototype.serverURL();

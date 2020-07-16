@@ -5,7 +5,7 @@
   top: -60px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: lightgray;
+  background-color: #d3d3d3;
   z-index: 15;
   padding: 0 100px;
   transition: all ease 1s;

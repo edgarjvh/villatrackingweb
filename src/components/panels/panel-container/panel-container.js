@@ -11,13 +11,7 @@ import ClientsPanel from './../clients/clients';
 import VehiclesPanel from './../vehicles/vehicles';
 import DevicesModelsPanel from '../devices_models/devices_models';
 import GeofencesPanel from '../geofences/geofences';
-
-const INITIAL_STATE = {    
-
-    panels: [
-
-    ]
-}
+import classNames from 'classnames';
 
 export default class PanelContainer extends Component {
 
@@ -242,11 +236,16 @@ export default class PanelContainer extends Component {
     }
 
     render() {
+        const panelContainerClasses = classNames({
+            'main-panel-container': true,
+            'hidden': this.props.isShowingGeofences || this.state.panels.length === 0,
+            'shown': !this.props.isShowingGeofences && this.state.panels.length > 0
+        });
+
         return (
-            <div className={this.props.isShowingGeofences ? 'main-panel-container hidden' : this.state.panels.length > 0 ? 'main-panel-container shown' : 'main-panel-container hidden'} id="main-panel-container">
+            <div className={panelContainerClasses}>
                 <div className="panel-container">
                     <div className="gutter"></div>
-
                     {
                         (this.state.panels || []).map((item) => (
                             item.type === 'users' ? <UsersPanel key={item.id} pid={item.id} uid={item.uid} ref={(users) => { window.users = users }} /> :

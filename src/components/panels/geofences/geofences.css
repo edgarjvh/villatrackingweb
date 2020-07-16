@@ -377,11 +377,11 @@
   color: lime;
   margin-left: 10px;
 }
-.sub-panels .sub-panels-wrapper .sub-panel .asigning-main-container .tbl .thead .trow.scrolling {
-  padding-right: 18px;
-}
 .sub-panels .sub-panels-wrapper .sub-panel .asigning-main-container .tbl .thead .tcol {
   padding: 0 5px !important;
+}
+.sub-panels .sub-panels-wrapper .sub-panel .asigning-main-container .tbl .tbody .tbody-wrapper {
+  overflow: overlay;
 }
 .sub-panels .sub-panels-wrapper .sub-panel .asigning-main-container .tbl .tbody .trow {
   display: flex;

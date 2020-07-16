@@ -1,0 +1,25 @@
+.maptype-container{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 5;
+    background-color: rgba(211,211,211,1);
+    border-radius: 10px 0 0 10px;
+    box-shadow: -1px -1px 4px 2px rgba(255,255,255,0.7), 1px 1px 4px 1px rgba(0,0,0,0.9);
+    overflow: hidden;
+
+    .maptype {
+        padding: 5px 15px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .maptype:not(:last-child){
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .maptype.active{
+        background-color: rgba(169,169,169,1);
+    }
+}

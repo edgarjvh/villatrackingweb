@@ -367,6 +367,40 @@
   height: 1px;
   background-color: rgba(0, 0, 0, 0.3);
 }
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container {
+  display: flex;
+  flex-direction: column;
+}
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container .row {
+  display: flex;
+}
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container .row .marker-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 1px 10px;
+  border-radius: 5px;
+  margin: 1px;
+  transition: ease 0.3s;
+  justify-content: space-between;
+}
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container .row .marker-icon img {
+  width: 100%;
+}
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container .row .marker-icon .icon-default {
+  height: 30px;
+  width: 30px;
+}
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container .row .marker-icon.selected {
+  background-color: #56aac4;
+}
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container .row .marker-icon.default {
+  display: flex;
+  max-width: 300px;
+}
+.sub-panels .sub-panels-wrapper .sub-panel form .icons-container .row .marker-icon:hover {
+  background-color: #56aac4;
+}
 .sub-panels .sub-panels-wrapper .sub-panel .current-client.hidden {
   display: none;
 }

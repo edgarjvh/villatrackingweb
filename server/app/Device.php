@@ -39,7 +39,11 @@ class Device extends Model
     }
 
     public function vehicle(){
-        return $this->belongsTo(Vehicle::class);
+        return $this->belongsTo(Vehicle::class)->with(['client']);
+    }
+
+    public function vehiclesClient(){
+        return $this->belongsTo(Vehicle::class)->with(['client']);
     }
 
     public function sim_card(){

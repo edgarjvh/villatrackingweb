@@ -54,6 +54,11 @@ class DevicesController extends Controller
         return response()->json(['result' => 'OK', 'devices' => compact('asigned', 'unasigned')]);
     }
 
+    public function getDevicesConsole() {
+        $devices = Device::where('asigned', true)->with(['vehicle', 'sim_card', 'device_model', 'dealer', 'location'])->get();
+        return response()->json(['result' => 'OK', 'devices' => $devices]);
+    }
+
     public function saveDevice(Request $request)
     {
         if ($request->id === 0) {

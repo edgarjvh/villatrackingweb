@@ -210,7 +210,7 @@ export default class GeofencesPanel extends Component {
                 let name = row.find('.name');
                 let description = row.find('.description');
                 let type = row.find('.type');                
-                let btnEditGeofence = row.find('.btn-edit-geofence');
+                // let btnEditGeofence = row.find('.btn-edit-geofence');
 
                 let showRow = false;
 
@@ -362,7 +362,7 @@ export default class GeofencesPanel extends Component {
     btnEditClick = (e) => {
         let id = Number($(e.target).closest('.trow').attr('id'));
 
-        const geofencesList = this.state.geofencesList.map(geofence => {
+        this.state.geofencesList.map(geofence => {
             if (geofence.id === id) {
                 geofence.isSelected = true;
 
@@ -509,10 +509,10 @@ export default class GeofencesPanel extends Component {
                     editingGeofenceName: geofence.name,
                     editingGeofenceDescription: geofence.description,
                     vehiclesAvailables
-                });
-
-                return false;
-            }            
+                });                
+            }   
+            
+            return false;
         });
     }
 
@@ -566,6 +566,8 @@ export default class GeofencesPanel extends Component {
             if (vehicle.asigned){
                 vehicles.push(vehicle.id);
             }
+
+            return false;
         });
 
         let data = {
@@ -749,10 +751,10 @@ render() {
         }).length === 0
     });
  
-    const saveMochiButtonClasses = classNames({
-        'mochi-button': true,
-        'disabled': (!this.state.adding && !this.state.editing) || this.state.saving
-    });
+    // const saveMochiButtonClasses = classNames({
+    //     'mochi-button': true,
+    //     'disabled': (!this.state.adding && !this.state.editing) || this.state.saving
+    // });
     /* #endregion */
 
     /* #region USER LIST CLASSES */
@@ -841,7 +843,9 @@ render() {
                                                                     <div className="tcol color">{vehicle.color}</div>     
                                                                 </div>
                                                             )
-                                                        }                                                        
+                                                        }  
+                                                        
+                                                        return false;
                                                     })
                                                 }
                                             </div>
@@ -898,7 +902,8 @@ render() {
                                                                     <div className="tcol color">{vehicle.color}</div>    
                                                                 </div>
                                                             )
-                                                        }                                                        
+                                                        }  
+                                                        return false;                                                      
                                                     })
                                                 }
                                             </div>

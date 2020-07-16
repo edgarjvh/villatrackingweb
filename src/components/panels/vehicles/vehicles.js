@@ -48,6 +48,9 @@ const INITIAL_STATE = {
     color: '',
     observations: '',
     status: false,
+    iconType: 'default',
+    iconSizeW: 20,
+    iconSizeH: 20,
     editingVehicleId: 0,
     vehiclesList: [],
     vehiclesShown: 0,
@@ -125,7 +128,7 @@ export default class VehiclesPanel extends Component {
         setTimeout(async () => {
             await axios.get(serverURL + '/getVehiclesWithDevicesChildren')
                 .then(res => {
-                    let wrapper = this.panel.find('#tbl-vehicles .wrapper');                    
+                    let wrapper = this.panel.find('#tbl-vehicles .wrapper');
 
                     if (res.data.result === 'OK') {
                         this.setState({
@@ -298,15 +301,15 @@ export default class VehiclesPanel extends Component {
                     color.text().toLowerCase().includes(this.state.searchText)
                 ) {
                     showRow = true;
-                } 
-                
+                }
+
                 if (
                     observations.text().toLowerCase().includes(this.state.searchText)
                 ) {
                     showRow = true;
                     inVehicle = true;
-                } 
-                
+                }
+
                 if (
                     dni.text().toLowerCase().includes(this.state.searchText) ||
                     name.text().toLowerCase().includes(this.state.searchText) ||
@@ -426,7 +429,10 @@ export default class VehiclesPanel extends Component {
                     color: vehicle.color,
                     observations: vehicle.observations,
                     status: vehicle.status === 1 ? true : false,
-                    selectingClientList
+                    selectingClientList,
+                    iconType: vehicle.icon_type,
+                    iconSizeW: vehicle.icon_size_w,
+                    iconSizeH: vehicle.icon_size_h
                 });
 
                 return vehicle;
@@ -593,7 +599,10 @@ export default class VehiclesPanel extends Component {
                 year: this.state.year,
                 color: this.state.color,
                 observations: this.state.observations,
-                status: this.state.status
+                status: this.state.status,
+                icon_type: this.state.iconType,
+                icon_size_w: this.state.iconSizeW,
+                icon_size_h: this.state.iconSizeH
             }
         )
             .then(res => {
@@ -613,6 +622,8 @@ export default class VehiclesPanel extends Component {
                             'error': false
                         })
                     });
+
+                    window.mainConsole.getClients();
 
                     setTimeout(() => {
                         this.setState(INITIAL_STATE);
@@ -744,19 +755,19 @@ export default class VehiclesPanel extends Component {
     editFromAssociated = (id, isOpened = false) => {
         this.panel.find('.sub-panels').fadeIn();
         let wrapper = this.panel.find('#tbl-vehicles .wrapper');
-        
+
         if (isOpened) {
             console.log(id);
             this.setState(INITIAL_STATE);
             this.getClients();
-            this.getVehicles( () => {
+            this.getVehicles(() => {
                 this.panel.find('.sub-panels').fadeIn();
                 const vehiclesList = this.state.vehiclesList.map(vehicle => {
-                    if (vehicle.id === id){
+                    if (vehicle.id === id) {
                         vehicle.isSelected = true;
 
-                        this.setState({        
-                            editingVehicleId: id,                    
+                        this.setState({
+                            editingVehicleId: id,
                             client_id: vehicle.client ? vehicle.client.id : 0,
                             client_name: vehicle.client ? vehicle.client.name : '',
                             licensePlate: vehicle.license_plate,
@@ -770,7 +781,7 @@ export default class VehiclesPanel extends Component {
                         });
 
                         return vehicle;
-                    }else{
+                    } else {
                         return vehicle;
                     }
                 });
@@ -784,11 +795,11 @@ export default class VehiclesPanel extends Component {
         } else {
             console.log(id);
             const vehiclesList = this.state.vehiclesList.map(vehicle => {
-                if (vehicle.id === id){
+                if (vehicle.id === id) {
                     vehicle.isSelected = true;
 
-                    this.setState({   
-                        editingVehicleId: id,                         
+                    this.setState({
+                        editingVehicleId: id,
                         client_id: vehicle.client ? vehicle.client.id : 0,
                         client_name: vehicle.client ? vehicle.client.name : '',
                         licensePlate: vehicle.license_plate,
@@ -802,7 +813,7 @@ export default class VehiclesPanel extends Component {
                     });
 
                     return vehicle;
-                }else{
+                } else {
                     return vehicle;
                 }
             });
@@ -1033,6 +1044,34 @@ export default class VehiclesPanel extends Component {
 
         $(document).find('.btn-clear-vehicle-client').removeClass('hidden');
     }
+
+    selectMarkerIcon = (e) => {
+        let iconType = 'default';
+        let iconSizeW = 20;
+        let iconSizeH = 20;
+
+        if ($(e.target).hasClass('marker-icon')) {
+            iconType = $(e.target).attr('data-icon-type');
+            iconSizeW = $(e.target).attr('data-icon-size-w');
+            iconSizeH = $(e.target).attr('data-icon-size-h');
+
+            $(document).find('.marker-icon').removeClass('selected');
+            $(e.target).addClass('selected');
+        } else {
+            iconType = $(e.target).closest('.marker-icon').attr('data-icon-type');
+            iconSizeW = $(e.target).closest('.marker-icon').attr('data-icon-size-w');
+            iconSizeH = $(e.target).closest('.marker-icon').attr('data-icon-size-h');
+
+            $(document).find('.marker-icon').removeClass('selected');
+            $(e.target).closest('.marker-icon').addClass('selected');
+        }
+
+        this.setState({
+            iconType,
+            iconSizeW,
+            iconSizeH
+        });        
+    }
     /* #endregion */
 
     /* #region RENDER METHOD */
@@ -1116,6 +1155,70 @@ export default class VehiclesPanel extends Component {
             'disabled': this.state.adding || this.state.editing || this.state.saving || this.state.deleting
         });
         /* #endregion */
+
+        /* #region  MARKER ICON CLASSES */
+        const defaultMarkerIconClasses = classNames({
+            'marker-icon': true,
+            'default': true,
+            'selected': this.state.iconType === 'default'
+        });
+        const sedan1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'sedan1'
+        });
+        const sedan2MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'sedan2'
+        });
+        const sedan3MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'sedan3'
+        });
+        const pickup1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'pickup1'
+        });
+        const wagon1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'wagon1'
+        });
+        const wagon2MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'wagon2'
+        });
+        const wagon3MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'wagon3'
+        });
+        const bus1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'bus1'
+        });
+        const truck1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'truck1'
+        });
+        const truck2MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'truck2'
+        });
+        const truck3MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'truck3'
+        });
+        const boat1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'boat1'
+        });
+        const van1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'van1'
+        });
+        const moto1MarkerIconClasses = classNames({
+            'marker-icon': true,
+            'selected': this.state.iconType === 'moto1'
+        });
+        /* #endregion */
         return (
             <div className="panel" id={this.props.pid}>
                 <div className="panel-wrapper">
@@ -1174,7 +1277,7 @@ export default class VehiclesPanel extends Component {
                                                 })
                                             }
                                         </select>
-                                        <label htmlFor={'client-id-' + this.props.pid}>Vehículo</label>
+                                        <label htmlFor={'client-id-' + this.props.pid}>Cliente</label>
                                     </div>
 
                                     <div className={toggleBoxClasses}>
@@ -1183,6 +1286,73 @@ export default class VehiclesPanel extends Component {
                                             <div className="lbl-toggle-button">Status</div>
                                             <div className="input-toggle-button"></div>
                                         </label>
+                                    </div>
+
+                                    <div className="icons-container">
+                                        <div className="row">
+                                            <div className={defaultMarkerIconClasses} data-icon-type="default" data-icon-size-w="20" data-icon-size-h="20" title="default" onClick={this.selectMarkerIcon}>
+                                                <img className="icon-default" src={require('./../../../marker-icons/default1.svg')} alt="default" />
+                                                <img className="icon-default" src={require('./../../../marker-icons/default2.svg')} alt="default" />
+                                            </div>
+
+                                            <div className={sedan1MarkerIconClasses} data-icon-type="sedan1" data-icon-size-w="20" data-icon-size-h="38" title="sedan 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/sedan1.svg')} alt="sedan" />
+                                            </div>
+                                            <div className={sedan2MarkerIconClasses} data-icon-type="sedan2" data-icon-size-w="20" data-icon-size-h="44" title="sedan 2" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/sedan2.svg')} alt="sedan" />
+                                            </div>
+                                            <div className={sedan3MarkerIconClasses} data-icon-type="sedan3" data-icon-size-w="20" data-icon-size-h="45" title="sedan 3" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/sedan3.svg')} alt="sedan" />
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className={pickup1MarkerIconClasses} data-icon-type="pickup1" data-icon-size-w="20" data-icon-size-h="49" title="pickup 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/pickup1.svg')} alt="pickup" />
+                                            </div>
+                                            <div className={wagon1MarkerIconClasses} data-icon-type="wagon1" data-icon-size-w="20" data-icon-size-h="46" title="wagon 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/wagon1.svg')} alt="wagon" />
+                                            </div>
+                                            <div className={wagon2MarkerIconClasses} data-icon-type="wagon2" data-icon-size-w="20" data-icon-size-h="41" title="wagon 2" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/wagon2.svg')} alt="wagon" />
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className={wagon3MarkerIconClasses} data-icon-type="wagon3" data-icon-size-w="20" data-icon-size-h="41" title="wagon 3" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/wagon3.svg')} alt="wagon" />
+                                            </div>
+                                            <div className={bus1MarkerIconClasses} data-icon-type="bus1" data-icon-size-w="20" data-icon-size-h="68" title="bus 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/bus1.svg')} alt="bus" />
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className={truck1MarkerIconClasses} data-icon-type="truck1" data-icon-size-w="20" data-icon-size-h="47" title="truck 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/truck1.svg')} alt="truck" />
+                                            </div>
+                                            <div className={truck2MarkerIconClasses} data-icon-type="truck2" data-icon-size-w="20" data-icon-size-h="73" title="truck 2" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/truck2.svg')} alt="truck" />
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className={truck3MarkerIconClasses} data-icon-type="truck3" data-icon-size-w="20" data-icon-size-h="97" title="truck 3" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/truck3.svg')} alt="truck" />
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className={boat1MarkerIconClasses} data-icon-type="boat1" data-icon-size-w="20" data-icon-size-h="60" title="boat 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/boat1.svg')} alt="boat" />
+                                            </div>
+                                            <div className={van1MarkerIconClasses} data-icon-type="van1" data-icon-size-w="20" data-icon-size-h="47" title="van 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/van1.svg')} alt="van" />
+                                            </div>
+                                            <div className={moto1MarkerIconClasses} data-icon-type="moto1" data-icon-size-w="20" data-icon-size-h="50" title="moto 1" onClick={this.selectMarkerIcon}>
+                                                <img src={require('./../../../marker-icons/moto1.svg')} alt="moto" />
+                                            </div>
+                                        </div>                                        
                                     </div>
 
                                     <div className="btn-area-form">

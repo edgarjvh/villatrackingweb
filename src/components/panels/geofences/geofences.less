@@ -440,16 +440,16 @@
                 }
 
                 .tbl{
-                    .thead{
-                        .trow.scrolling{
-                            padding-right: 18px;
-                            
-                        }
+                    .thead{                        
                         .tcol{
                             padding: 0 5px !important;
                         }
                     }
                     .tbody{
+                        .tbody-wrapper{                            
+                            overflow: overlay;
+                        }
+
                         .trow{
                             display: flex;
                             align-items: center;

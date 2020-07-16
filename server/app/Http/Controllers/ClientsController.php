@@ -13,6 +13,11 @@ class ClientsController extends Controller
         return response()->json(['result' => 'OK', 'clients' => $clients]);  
     }
 
+    public function getClientsConsole(){
+        $clients = Client::with(['vehiclesChildren'])->get();
+        return response()->json(['result' => 'OK', 'clients' => $clients]);  
+    }
+
     public function getClientsWithVehicles(){
         $clients = Client::with(['vehicles'])->get();
         return response()->json(['result' => 'OK', 'clients' => $clients]);  

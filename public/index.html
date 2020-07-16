@@ -8,20 +8,31 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="apple-touch-icon" href="logo192.png" />
-  
+
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
+  <style>
+    @font-face {
+      font-family: 'moonhouse';
+      src: url('/fonts/moonhouse.woff') format('woff'),
+        /* Pretty Modern Browsers */
+        url('/fonts/moonhouse.ttf') format('truetype');
+      /* Legacy iOS */
+    }
+  </style>
+
   <link href="https://fonts.googleapis.com/css?family=Hind+Madurai:300,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
     integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin=""></script>    
-    <script src="/js/jquery-ui.js"></script>
-  
+    crossorigin=""></script>
+  <script src="/js/jquery-ui.js"></script>
+
   <title>VillaTracking</title>
 
 </head>
@@ -29,9 +40,9 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
- 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?v=weekly"></script>
-    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyA3aZ3j-w2s2lwzMLA4qudEGEQ1zzDE_7I"></script> -->
+
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=weekly"></script> -->
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyA3aZ3j-w2s2lwzMLA4qudEGEQ1zzDE_7I"></script> -->
 </body>
 
 </html>
