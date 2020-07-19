@@ -20,7 +20,7 @@ map {
   }
 
   .leaflet-popup {
-    min-width: 300px !important;
+    min-width: 400px !important;
   }
 
   .leaflet-popup-tip {
@@ -96,7 +96,7 @@ map {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-left: 10px;
+          width: 100%;
         }
 
         .popup-title {
@@ -110,9 +110,37 @@ map {
         .popup-gps-row,
         .popup-sensor-row {
           padding: 3px 5px;
-          justify-content: space-evenly;
+          // justify-content: center;
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-          flex-basis: 100%;
+          
+
+          > div{            
+            flex-grow: 1;
+            flex-basis: 100%;
+          }
+
+          .icon{
+            width: 24px;
+            max-width: 24px;
+            max-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img{
+              width: 100%;
+            }
+          }
+        }
+
+        .popup-vehicle-row,
+        .popup-address-row {
+          padding: 3px 5px;
+          justify-content: center;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);          
+
+          > div{
+            flex-grow: 1;
+          }
 
           .icon{
             width: 24px;
@@ -124,11 +152,15 @@ map {
           }
         }
 
-        .popup-address {
+        .popup-address,
+        .popup-vehicle {
           padding: 3px 5px;
-          justify-content: center;
-          // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-          margin-left: 0;
+          justify-content: center;          
+          margin-left: 0; 
+        }
+
+        .popup-vehicle{
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
       }
 

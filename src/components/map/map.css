@@ -14,7 +14,7 @@ map {
   display: none;
 }
 .leaflet-container .leaflet-popup {
-  min-width: 300px !important;
+  min-width: 400px !important;
 }
 .leaflet-container .leaflet-popup-tip {
   background-color: #fff;
@@ -81,7 +81,7 @@ map {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 10px;
+  width: 100%;
 }
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-title {
   font-weight: normal;
@@ -93,8 +93,13 @@ map {
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-gps-row,
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-sensor-row {
   padding: 3px 5px;
-  justify-content: space-evenly;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-location-row > div,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-datetime-row > div,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-gps-row > div,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-sensor-row > div {
+  flex-grow: 1;
   flex-basis: 100%;
 }
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-location-row .icon,
@@ -104,6 +109,9 @@ map {
   width: 24px;
   max-width: 24px;
   max-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-location-row .icon img,
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-datetime-row .icon img,
@@ -111,10 +119,34 @@ map {
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-sensor-row .icon img {
   width: 100%;
 }
-.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-address {
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-vehicle-row,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-address-row {
+  padding: 3px 5px;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-vehicle-row > div,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-address-row > div {
+  flex-grow: 1;
+}
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-vehicle-row .icon,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-address-row .icon {
+  width: 24px;
+  max-width: 24px;
+  max-height: 24px;
+}
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-vehicle-row .icon img,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-address-row .icon img {
+  width: 100%;
+}
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-address,
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-vehicle {
   padding: 3px 5px;
   justify-content: center;
   margin-left: 0;
+}
+.leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-device-info .popup-vehicle {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .leaflet-container .leaflet-popup-content-wrapper .popup-bg .popup-command-row {
   min-height: 30px;

@@ -37,7 +37,7 @@ export default class MainMap extends Component {
   circleRef = createRef(Circle);
 
   setMapCenter = (lat, lng) => {
-    setTimeout(this.setMapView(lat,lng),1000);
+    setTimeout(this.setMapView(lat, lng), 1000);
   }
 
   refreshMarkers = devicesShown => {
@@ -212,84 +212,109 @@ export default class MainMap extends Component {
                         <div className="popup-client-name">{marker.vehicle.client.name}</div>
                         <div className="popup-license-plate">{marker.vehicle.license_plate}</div>
                       </div>
+                      
                       <div className="popup-device-info">
+                        <div className="popup-vehicle-row row">
+                          <div className="popup-vehicle-icon icon">
+                            <img src={require('./../../marker-icons/car.png')} alt="vehicle" />
+                          </div>
+
+                          <div className="popup-vehicle col">
+                            <div className="popup-title">Vehículo</div>
+                            <div className="popup-data">
+                              {
+                                marker.vehicle.brand + ' ' +
+                                marker.vehicle.model + ' ' +
+                                marker.vehicle.year.toString() + ' ' +
+                                marker.vehicle.color
+                              }
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
 
                         <div className="popup-location-row row">
-
                           <div className="popup-latitude-row row">
-
                             <div className="popup-latitude-icon icon">
                               <img src={require('./../../marker-icons/lat.png')} alt="latitude" />
                             </div>
-
                             <div className="popup-latitude col">
                               <div className="popup-title">Latitud</div>
                               <div className="popup-data">{marker.location.latitude}</div>
                             </div>
-
                           </div>
 
                           <div className="popup-longitude-row row">
-
                             <div className="popup-longitude-icon icon">
                               <img src={require('./../../marker-icons/lng.png')} alt="longitude" />
                             </div>
-
                             <div className="popup-longitude col">
                               <div className="popup-title">Longitud</div>
                               <div className="popup-data">{marker.location.longitude}</div>
                             </div>
-
                           </div>
 
+                          <div className="popup-speed-row row">
+                            <div className="popup-speed-icon icon">
+                              <img src={require('./../../marker-icons/speedometer.png')} alt="speed" />
+                            </div>
+                            <div className="popup-speed col">
+                              <div className="popup-title">Velocidad</div>
+                              <div className="popup-data">{marker.location.speed.toString() + ' Km/h'}</div>
+                            </div>
+                          </div>
                         </div>
 
+
+
                         <div className="popup-datetime-row row">
-
                           <div className="popup-date-row row">
-
                             <div className="popup-date-icon icon">
                               <img src={require('./../../marker-icons/date.png')} alt="date" />
                             </div>
-
                             <div className="popup-date col">
                               <div className="popup-title">Fecha</div>
                               <div className="popup-data">
                                 {moment(marker.location.date_time, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY')}
                               </div>
                             </div>
-
                           </div>
 
                           <div className="popup-time-row row">
-
                             <div className="popup-time-icon icon">
                               <img src={require('./../../marker-icons/time.png')} alt="time" />
                             </div>
-
                             <div className="popup-time col">
                               <div className="popup-title">Hora</div>
                               <div className="popup-data">
                                 {moment(marker.location.date_time, 'YYYY-MM-DD HH:mm:ss').format('hh:mm:ss a')}
                               </div>
                             </div>
-
                           </div>
 
+                          <div className="popup-ignition-row row">
+                            <div className="popup-ignition-icon icon">
+                              <img src={require('./../../marker-icons/ignition.png')} alt="ignition" />
+                            </div>
+                            <div className="popup-ignition col">
+                              <div className="popup-title">Ignición</div>
+                              <div className="popup-data">
+                                {
+                                  marker.location.engine_status === 0 ? 'Apagado' :
+                                    marker.location.engine_status === 1 ? 'Encendido' : 'N/A'
+                                }
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
+
+
+
                         <div className="popup-gps-row row">
-                          <div className="popup-speed-row row">
-                            <div className="popup-speed-icon icon">
-                              <img src={require('./../../marker-icons/speedometer.png')} alt="speed" />
-                            </div>
-
-                            <div className="popup-speed col">
-                              <div className="popup-title">Velocidad</div>
-                              <div className="popup-data">{marker.location.speed.toString() + ' Km/h'}</div>
-                            </div>
-                          </div>
-
                           <div className="popup-odometer-row row">
                             <div className="popup-odometer-icon icon">
                               <img src={require('./../../marker-icons/odometer.png')} alt="odometer" />
@@ -300,9 +325,6 @@ export default class MainMap extends Component {
                             </div>
                           </div>
 
-                        </div>
-
-                        <div className="popup-sensor-row row">
                           <div className="popup-fuel-row row">
                             <div className="popup-fuel-icon icon">
                               <img src={require('./../../marker-icons/fuel.png')} alt="fuel" />
@@ -322,12 +344,21 @@ export default class MainMap extends Component {
                               <div className="popup-data">N/A</div>
                             </div>
                           </div>
-
                         </div>
 
-                        <div className="popup-address col">
-                          <div className="popup-title">Dirección</div>
-                          <div className="popup-data">N/A</div>
+
+
+
+
+
+                        <div className="popup-address-row row">
+                          <div className="popup-address-icon icon">
+                            <img src={require('./../../marker-icons/address.png')} alt="address" />
+                          </div>
+                          <div className="popup-address col">
+                            <div className="popup-title">Dirección</div>
+                            <div className="popup-data">N/A</div>
+                          </div>
                         </div>
                       </div>
 

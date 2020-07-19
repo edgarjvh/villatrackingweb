@@ -29,6 +29,10 @@ export default class MainConsole extends Component {
         }
     }
 
+    sendCommand = (command) => {
+
+    }
+
     componentDidMount(){
         this.getClients();
 
@@ -36,7 +40,9 @@ export default class MainConsole extends Component {
 
         socket.on('new gps data', data => {
             const devicesShown = this.state.devicesShown.map(device => {
+                
                 if (device.imei === data.imei){
+                    console.log(data);
                     if (device.location){
                         device.location.date_time = data.datetime;
                         device.location.engine_status = data.engine_status;
@@ -44,7 +50,7 @@ export default class MainConsole extends Component {
                         device.location.name = data.event;
                         device.location.latitude = data.latitude;
                         device.location.longitude = data.longitude;
-                        device.location.orientation = data.orientation;
+                        device.location.orientation = Number(data.orientation);
                         device.location.speed = data.speed;
                         device.location.ip = data.ip;
                         device.location.port = data.port;
@@ -58,7 +64,7 @@ export default class MainConsole extends Component {
                             name: data.event,
                             latitude: data.latitude,
                             longitude: data.longitude,
-                            orientation: data.orientation,
+                            orientation: Number(data.orientation),
                             speed: data.speed,
                             ip: data.ip,
                             port: data.port
